@@ -30,16 +30,4 @@ class HomeController extends Controller
     {
         return view('client.index', $this->homeService->index());
     }
-
-    public function maintenance()
-    {
-        $setting = Setting::first();
-        return view('client.maintenance', ['setting' => $setting]);
-    }
-
-    public function introduction()
-    {
-        $setting = Setting::first();
-        return view('client.introduction', ['setting' => $setting]);
-    }
 }

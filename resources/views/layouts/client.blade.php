@@ -139,7 +139,7 @@
             </div>
             <div class="col-xs-6 col-sm-4 shopcart">
               <div id="cart" class="btn-group btn-block mtb_40">                
-                <a style="float: right;padding-left: 30px;" href="{{ route('cart.index') }}">
+                {{-- <a style="float: right;padding-left: 30px;" href="{{ route('cart.index') }}"> --}}
                   <i class="fas fa-shopping-cart" style="font-size: 25px; color: #fff;"></i>
                 </a>
               </div>

@@ -5,12 +5,27 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchController;
 
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['maintenance_active'])->group(function () {
     //Hiển thị trang bảo trì website
     Route::get('maintenance', [HomeController::class, "maintenance"])->name('user.maintenance');
+});
+Route::middleware(['maintenance'])->group(function () {
+    //FE: Trang chủ
+    Route::get('/', [HomeController::class, "index"])->name('user.home');
+    //FE: Trang giới thiệu 
+    Route::get('introduction', [HomeController::class, "introduction"])->name('user.introduction');
+    //FE: Trang chi tiết sản phẩm
+    Route::get('product-detail/{product}', [ProductDetailController::class, "show"])->name('user.products_detail');
+    //FE: Trang hiển thị sản phẩm tìm kiếm
+    Route::get('search', [SearchController::class, "search"])->name('user.search');
+    //FE: Trang hiển thị sản phẩm theo danh mục
+    Route::get('products/{slug}', [ProductController::class, "index"])->name('user.products');
 });
 
 
