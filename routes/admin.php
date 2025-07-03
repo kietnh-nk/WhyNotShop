@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController as AdminEmailVerificationPromptController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 
@@ -50,5 +51,14 @@ Route::middleware(['auth.admin', 'admin.verified'])->group(function () {
         Route::get('update/{product}', [ProductController::class, "edit"])->name('admin.products_edit');
         Route::post('update/{product}', [ProductController::class, "update"])->name('admin.products_update');
         Route::post('delete', [ProductController::class, "delete"])->name('admin.products_delete');
-    });  
+    });
+
+    Route::group(['prefix' => 'categories'], function () {
+        Route::get('/', [CategoryController::class, "index"])->name('admin.category_index');
+        Route::get('create', [CategoryController::class, "create"])->name('admin.category_create');
+        Route::post('create', [CategoryController::class, "store"])->name('admin.category_store');
+        Route::get('edit/{category}', [CategoryController::class, "edit"])->name('admin.category_edit');
+        Route::post('update/{category}', [CategoryController::class, "update"])->name('admin.category_update');
+        Route::post('delete', [CategoryController::class, "delete"])->name('admin.category_delete');
+    });
 });
