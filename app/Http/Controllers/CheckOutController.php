@@ -57,19 +57,19 @@ class CheckOutController extends Controller
             'ward' => $request->ward,
         ]);
         // nếu khách hàng chọn thanh toán online momo
-        if ($request->payment_method == Payment::METHOD['momo']) {
-            return $this->checkOutService->paymentMomo($request);
-        }
+        // if ($request->payment_method == Payment::METHOD['momo']) {
+        //     return $this->checkOutService->paymentMomo($request);
+        // }
         // nếu khách hàng chọn thanh toán online vnpay
-        if ($request->payment_method == Payment::METHOD['vnpay']) {
-            return $this->checkOutService->paymentVNPAY($request);
-        }
-        return $this->checkOutService->store($request);
+    //     if ($request->payment_method == Payment::METHOD['vnpay']) {
+    //         return $this->checkOutService->paymentVNPAY($request);
+    //     }
+    //     return $this->checkOutService->store($request);
     }
 
-    public function callbackMomo(Request $request)
-    {
-        return $this->checkOutService->callbackMomo($request);
-    }
+    // public function callbackMomo(Request $request)
+    // {
+    //     return $this->checkOutService->callbackMomo($request);
+    // }
 
 }
