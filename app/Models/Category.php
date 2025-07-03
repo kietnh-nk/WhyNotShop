@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
-class Product extends Model
+class Category extends Model
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -17,7 +18,7 @@ class Product extends Model
      *
      * @var string
      */
-    protected $table = 'products';
+    protected $table = 'categories';
 
     /**
      * The attributes that are mass assignable.
@@ -26,23 +27,17 @@ class Product extends Model
      */
     protected $fillable = [
         'name',
-        'price_import',
-        'price_sell',
-        'img',
-        'description',
-        'status',
-        'category_id',
-        'brand_id',
+        'parent_id',
+        'slug',
     ];
 
-    const PRODUCT_NUMBER_ITEM = [
-        'search' => 24,
-        'show' => 6,
-    ];
-
-    public function category()
+    public function setSlugAttribute($value)
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id')->setEagerLoads([]);
-
+        $slug = Str::slug($value);
+        $count = Category::where('slug', $slug)->count();
+        if ($count > 0) {
+            $slug = $slug . '-' . $count;
+        }
+        $this->attributes['slug'] = $slug;
     }
 }
